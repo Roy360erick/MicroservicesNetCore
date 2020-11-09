@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  microserviceauthor:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "6104:80"
+  microservicebooks:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "6105:80"
+
+  microserviceshoppingcart:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Services__Books=http://microservicebooks
+    ports:
+      - "6106:80"

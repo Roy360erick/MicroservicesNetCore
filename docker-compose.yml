@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  microserviceauthor:
+    image: ${DOCKER_REGISTRY-}microserviceauthor
+    build:
+      context: .
+      dockerfile: MicroserviceAuthor/Dockerfile
+  microservicebooks:
+    image: ${DOCKER_REGISTRY-}microservicebooks
+    build:
+      context: .
+      dockerfile: MicroserviceBooks/Dockerfile
+
+  microserviceshoppingcart:
+    image: ${DOCKER_REGISTRY-}microserviceshoppingcart
+    build:
+      context: .
+      dockerfile: MicroserviceShoppingCart/Dockerfile
+
+networks:
+  default:
+    external:
+      name: microservicenet
+
+
