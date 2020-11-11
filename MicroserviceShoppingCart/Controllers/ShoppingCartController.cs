@@ -17,14 +17,13 @@ namespace MicroserviceShoppingCart.Controllers
             _mediator = mediator;
         }
 
-        [Route("GetById/{id}")]
+        [Route("{id}")]
         [HttpGet]
         public async Task<ShoppingCartDto> GetById(int id)
         {
             return await _mediator.Send(new Query.RequestShoppingCart { ShoppingCartId = id});
         }
 
-        [Route("Create")]
         [HttpPost]
         public async Task<ActionResult<Unit>> Create(New.SessionCartRequest request)
         {

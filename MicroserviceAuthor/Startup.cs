@@ -3,12 +3,16 @@ using FluentValidation.AspNetCore;
 using MediatR;
 using MicroserviceAuthor.Application;
 using MicroserviceAuthor.Persistence;
+using MicroserviceAuthor.RabbitDriver;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RabbirtMQ.Bus.EventQueue;
+using RabbirtMQ.Bus.Implements;
+using RabbirtMQ.Bus.RabbitBus;
 
 namespace MicroserviceAuthor
 {
@@ -35,12 +39,27 @@ namespace MicroserviceAuthor
             {
                 options.RegisterValidatorsFromAssemblyContaining<New>();
             });
+
+            services.AddSingleton<IRabbitEventBuss, RabbitEventBuss>(sp => 
+            {
+                var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
+                return new RabbitEventBuss(sp.GetService<IMediator>(), scopeFactory);
+
+            });
+            services.AddTransient<EventMainDriver>();
+
+            services.AddTransient<IEventDrive<EventMailQueue>, EventMainDriver>();
+           
             services.AddMediatR(typeof(New.Driver).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var eventBuss = app.ApplicationServices.GetRequiredService<IRabbitEventBuss>();
+
+            eventBuss.Subscribe<EventMailQueue,EventMainDriver>();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

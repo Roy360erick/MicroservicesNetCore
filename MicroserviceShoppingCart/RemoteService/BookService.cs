@@ -24,7 +24,7 @@ namespace MicroserviceShoppingCart.RemoteService
             try
             {
                 var client = _httpClient.CreateClient("Books");
-                var response = await client.GetAsync($"api/book/GetById/{BookID}");
+                var response = await client.GetAsync($"api/book/{BookID}");
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();

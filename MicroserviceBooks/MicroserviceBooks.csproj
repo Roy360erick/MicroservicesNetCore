@@ -49,4 +49,7 @@
   <None Remove="MicroserviceBooks.Test\obj\Debug\netcoreapp3.1\MicroserviceBooks.Test.assets.cache" />
   <None Remove="MicroserviceBooks.Test\obj\Debug\netcoreapp3.1\MicroserviceBooks.Test.csproj.FileListAbsolute.txt" />
 </ItemGroup>
+<ItemGroup>
+  <ProjectReference Include="..\RabbirtMQ.Bus\RabbirtMQ.Bus.csproj" />
+</ItemGroup>
 </Project>

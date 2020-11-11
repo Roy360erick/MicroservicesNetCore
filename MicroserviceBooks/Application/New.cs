@@ -5,6 +5,8 @@ using FluentValidation;
 using MediatR;
 using MicroserviceBooks.Models;
 using MicroserviceBooks.Persistence;
+using RabbirtMQ.Bus.EventQueue;
+using RabbirtMQ.Bus.RabbitBus;
 
 namespace MicroserviceBooks.Application
 {
@@ -30,10 +32,12 @@ namespace MicroserviceBooks.Application
         public class Driver : IRequestHandler<RequestBook>
         {
             private readonly DbContextBook _context;
+            private readonly IRabbitEventBuss _rabbitEventBuss;
 
-            public Driver(DbContextBook context)
+            public Driver(DbContextBook context, IRabbitEventBuss rabbitEventBuss)
             {
                 _context = context;
+                _rabbitEventBuss = rabbitEventBuss;
             }
             public async Task<Unit> Handle(RequestBook request, CancellationToken cancellationToken)
             {
@@ -46,11 +50,11 @@ namespace MicroserviceBooks.Application
                 await _context.Books.AddAsync(book);
                 var result = await _context.SaveChangesAsync();
 
-                if(result > 0)
+                _rabbitEventBuss.Publish(new EventMailQueue("", "Mail de prueba", ""));
+                if (result > 0)
                 {
                     return Unit.Value;
                 }
-
                 throw new Exception("No se pudo completar el registro del libro");
             }
         }

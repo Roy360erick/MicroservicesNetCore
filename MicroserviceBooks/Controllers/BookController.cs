@@ -20,21 +20,19 @@ namespace MicroserviceBooks.Controllers
         }
 
         [HttpGet]
-        [Route("Get")]
         public async Task<List<BookDto>> Get()
         {
             return await _mediator.Send(new Query.BookRequest());
         }
 
         [HttpGet]
-        [Route("GetById/{Id}")]
+        [Route("{Id}")]
         public async Task<BookDto> GetById(Guid Id)
         {
             return await _mediator.Send(new QueryFilter.BookRequest { BookID = Id});
         }
 
         [HttpPost]
-        [Route("Create")]
         public async Task<ActionResult<Unit>> Create(New.RequestBook request)
         {
             return await _mediator.Send(request);

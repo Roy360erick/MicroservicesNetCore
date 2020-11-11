@@ -29,4 +29,7 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="9.2.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RabbirtMQ.Bus\RabbirtMQ.Bus.csproj" />
+  </ItemGroup>
 </Project>

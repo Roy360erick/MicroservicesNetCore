@@ -2,24 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
-using FluentValidation.AspNetCore;
-using MediatR;
-using MicroserviceBooks.Application;
-using MicroserviceBooks.Persistence;
+using MicroserviceApiGateway.MessageHandler;
+using MicroserviceApiGateway.Services.Authors;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using RabbirtMQ.Bus.Implements;
-using RabbirtMQ.Bus.RabbitBus;
+using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
 
-namespace MicroserviceBooks
+namespace MicroserviceApiGateway
 {
     public class Startup
     {
@@ -33,32 +28,22 @@ namespace MicroserviceBooks
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DbContextBook>(options =>
+            //services.AddControllers();
+            services.AddHttpClient("AuthorService", cfg =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("myconn"));
+                cfg.BaseAddress = new Uri(Configuration["Services:Author"]);
             });
-            services.AddAutoMapper(typeof(Query.BookRequest));
-            services.AddMediatR(typeof(New.Driver).Assembly);
-
-            //services.AddTransient<IRabbitEventBuss, RabbitEventBuss>();
-            services.AddSingleton<IRabbitEventBuss, RabbitEventBuss>(sp =>
-            {
-                var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
-                return new RabbitEventBuss(sp.GetService<IMediator>(), scopeFactory);
-
-            });
-            services.AddControllers().AddFluentValidation(opt => opt.RegisterValidatorsFromAssemblyContaining<New>());
+            services.AddSingleton<IAuthorService, AuthorService>();
+            services.AddOcelot().AddDelegatingHandler<BookHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -68,6 +53,8 @@ namespace MicroserviceBooks
             {
                 endpoints.MapControllers();
             });
+
+            await app.UseOcelot();
         }
     }
 }

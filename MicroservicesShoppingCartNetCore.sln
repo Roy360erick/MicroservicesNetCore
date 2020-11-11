@@ -16,6 +16,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroserviceBooks.Test", "M
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{FF30FEC6-68E4-480C-9455-D699E706B45D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShoppingCart", "ShoppingCart", "{05C7A5EB-DDA8-4F4B-BF28-7240A95214B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceApiGateway", "MicroserviceApiGateway\MicroserviceApiGateway.csproj", "{7BB1DB1C-C5AA-4F63-9E9C-21EB0BBF539D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbirtMQ.Bus", "RabbirtMQ.Bus\RabbirtMQ.Bus.csproj", "{8993FF74-994A-4F9C-A806-C8A2008B69DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,12 +48,21 @@ Global
 		{FF30FEC6-68E4-480C-9455-D699E706B45D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF30FEC6-68E4-480C-9455-D699E706B45D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF30FEC6-68E4-480C-9455-D699E706B45D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BB1DB1C-C5AA-4F63-9E9C-21EB0BBF539D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BB1DB1C-C5AA-4F63-9E9C-21EB0BBF539D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BB1DB1C-C5AA-4F63-9E9C-21EB0BBF539D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BB1DB1C-C5AA-4F63-9E9C-21EB0BBF539D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8993FF74-994A-4F9C-A806-C8A2008B69DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8993FF74-994A-4F9C-A806-C8A2008B69DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8993FF74-994A-4F9C-A806-C8A2008B69DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8993FF74-994A-4F9C-A806-C8A2008B69DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7F12868D-9335-4419-A670-DE9862F58789} = {F792CFED-EADA-42BF-9621-C829835B9B0F}
+		{A01615C2-E6DD-4508-B071-276B6DE3CB97} = {05C7A5EB-DDA8-4F4B-BF28-7240A95214B1}
 		{1B785534-1610-423A-A25C-64D5824B8ADD} = {82610896-0B81-4DEF-BFFA-6432DA0956DC}
 		{E40D62C0-4291-47BA-BE46-F1B8733E3ACC} = {82610896-0B81-4DEF-BFFA-6432DA0956DC}
 	EndGlobalSection

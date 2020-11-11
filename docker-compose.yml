@@ -18,9 +18,16 @@ services:
       context: .
       dockerfile: MicroserviceShoppingCart/Dockerfile
 
+  microserviceapigateway:
+    image: ${DOCKER_REGISTRY-}microserviceapigateway
+    build:
+      context: .
+      dockerfile: MicroserviceApiGateway/Dockerfile
+
 networks:
   default:
     external:
       name: microservicenet
+
 
 

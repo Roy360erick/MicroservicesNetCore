@@ -18,21 +18,19 @@ namespace MicroserviceAuthor.Controllers
             _mediator = mediator;
         }
 
-        [Route("Get")]
         [HttpGet]
         public async Task<List<AuthorDto>> Get()
         {
             return await _mediator.Send(new Query.RequestAuthor());
         }
 
-        [Route("GetById/{id}")]
+        [Route("{id}")]
         [HttpGet]
         public async Task<AuthorDto> GetById(string id)
         {
             return await _mediator.Send(new QueryFilter.RequestFilterAuthor{ AuthorGuid = id });
         }
 
-        [Route("Create")]
         [HttpPost]
         public async Task<ActionResult<Unit>> Create(New.Execute request)
         {

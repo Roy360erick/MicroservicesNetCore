@@ -18,3 +18,13 @@ services:
       - Services__Books=http://microservicebooks
     ports:
       - "6106:80"
+
+  microserviceapigateway:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Services__Author=http://microserviceapigateway
+    depends_on:
+      - microservicebooks
+    ports:
+      - "6107:80"
+
