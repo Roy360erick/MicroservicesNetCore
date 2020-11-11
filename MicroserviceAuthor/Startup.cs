@@ -1,6 +1,7 @@
 using AutoMapper;
 using FluentValidation.AspNetCore;
 using MediatR;
+using MessengerService.Mail.SendGrid.Services;
 using MicroserviceAuthor.Application;
 using MicroserviceAuthor.Persistence;
 using MicroserviceAuthor.RabbitDriver;
@@ -46,6 +47,7 @@ namespace MicroserviceAuthor
                 return new RabbitEventBuss(sp.GetService<IMediator>(), scopeFactory);
 
             });
+            services.AddSingleton<ISendGridService, SendGridService>();
             services.AddTransient<EventMainDriver>();
 
             services.AddTransient<IEventDrive<EventMailQueue>, EventMainDriver>();

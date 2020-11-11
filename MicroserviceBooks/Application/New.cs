@@ -50,7 +50,7 @@ namespace MicroserviceBooks.Application
                 await _context.Books.AddAsync(book);
                 var result = await _context.SaveChangesAsync();
 
-                _rabbitEventBuss.Publish(new EventMailQueue("", "Mail de prueba", ""));
+                _rabbitEventBuss.Publish(new EventMailQueue("erick.fernandez@tecsup.edu.pe", "Mail de prueba", "Mensaje desde RabbitMQ"));
                 if (result > 0)
                 {
                     return Unit.Value;

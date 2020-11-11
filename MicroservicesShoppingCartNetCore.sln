@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceApiGateway", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbirtMQ.Bus", "RabbirtMQ.Bus\RabbirtMQ.Bus.csproj", "{8993FF74-994A-4F9C-A806-C8A2008B69DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessengerService.Mail", "MessengerService.Mail\MessengerService.Mail.csproj", "{EAF8F70E-220B-4758-AA6B-C1FC88259218}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{8993FF74-994A-4F9C-A806-C8A2008B69DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8993FF74-994A-4F9C-A806-C8A2008B69DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8993FF74-994A-4F9C-A806-C8A2008B69DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAF8F70E-220B-4758-AA6B-C1FC88259218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAF8F70E-220B-4758-AA6B-C1FC88259218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAF8F70E-220B-4758-AA6B-C1FC88259218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAF8F70E-220B-4758-AA6B-C1FC88259218}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
